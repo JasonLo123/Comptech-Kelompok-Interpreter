@@ -16,9 +16,9 @@ tokens = keywords + [
     'PLUS',         # '+'
     'MINUS',        # '-'
     'TIMES',        # '*'
-    'POWER'         # **
+    'POWER',        # **
     'DIVIDE',       # '/'
-    'MOD'           # 'modulo'
+    'MOD',          # 'modulo'
     'LT',           # '<'
     'LE',           # '<='
     'GT',           # '>'
