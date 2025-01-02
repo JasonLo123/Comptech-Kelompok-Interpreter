@@ -3,7 +3,7 @@ from ply import *
 # Define keywords names
 keywords = [
     'PROGRAM', 'VAR', 'BEGIN', 'END', 'INTEGER', 'REAL',
-    'WRITELN', 'WRITE', 'READ', 'FOR', 'TO', 
+    'WRITELN', 'WRITE', 'FOR', 'TO', 
     'DO', 'IF', 'THEN', 'ELSE',
 ]
 
