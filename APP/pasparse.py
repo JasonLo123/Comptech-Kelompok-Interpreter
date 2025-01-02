@@ -1,6 +1,15 @@
 from ply import *
 import paslex
 
+tokens = paslex.tokens
+
+precedence = (
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'TIMES', 'DIVIDE'),
+    ('left', 'POWER'),
+    ('right', 'UMINUS')
+)
+
 # Parser rules
 
 # Build the parser
