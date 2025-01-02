@@ -6,7 +6,7 @@ keywords = [
     'STRING', 'ARRAY', 'RECORD', 'CONST', 'TYPE', 'PROCEDURE', 'FUNCTION',
     'WRITELN', 'WRITE', 'READ', 'READLN', 'FOR', 'TO', 'DOWNTO', 'DO', 
     'IF', 'THEN', 'ELSE', 'WHILE', 'REPEAT', 'UNTIL', 'CASE', 'OF', 
-    'WITH', 'DIV', 'MOD', 'AND', 'OR', 'NOT', 'IN'
+    'WITH', 'MOD', 'AND', 'OR', 'NOT', 'IN'
 ]
 
 # Define token names
