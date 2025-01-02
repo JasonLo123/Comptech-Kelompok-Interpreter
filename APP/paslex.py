@@ -11,6 +11,7 @@ keywords = [
 tokens = keywords + [
     'ID',           # Identifiers
     'NUMBER',       # Numeric literals
+    'COLON'         # ':'
     'SEMICOLON',    # ';'
     'COMMA',        # ','
     'PLUS',         # '+'
@@ -33,6 +34,7 @@ tokens = keywords + [
 
 
 # Regular expression rules for simple tokens
+t_COLON = r':'
 t_SEMICOLON = r';'
 t_COMMA = r','
 t_PLUS = r'\+'
