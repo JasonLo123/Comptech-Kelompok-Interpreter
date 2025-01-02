@@ -1,13 +1,9 @@
 from ply import *
 import paslex
 
+tokens = paslex.tokens
+
 # Parser rules
-precedence = (
-    ('left', 'PLUS', 'MINUS'),
-    ('left', 'TIMES', 'DIVIDE'),
-    ('left', 'POWER'),
-    ('right', 'UMINUS')
-)
 
 # Build the parser
 pasparser = yacc.yacc()

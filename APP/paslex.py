@@ -4,7 +4,7 @@ from ply import *
 keywords = [
     'PROGRAM', 'VAR', 'BEGIN', 'END', 'INTEGER', 'REAL',
     'WRITELN', 'WRITE', 'FOR', 'TO', 
-    'DO', 'IF', 'THEN', 'ELSE',
+    'DO', 'IF', 'THEN', 'ELSE', 'MOD',
 ]
 
 # Define token names
@@ -18,7 +18,6 @@ tokens = keywords + [
     'TIMES',        # '*'
     'POWER',        # **
     'DIVIDE',       # '/'
-    'MOD',          # 'modulo'
     'LT',           # '<'
     'LE',           # '<='
     'GT',           # '>'
@@ -41,7 +40,6 @@ t_MINUS = r'-'
 t_TIMES = r'\*'
 t_POWER = r'\*\*'
 t_DIVIDE = r'/'
-t_MOD = r'\bMOD\b'
 t_LT = r'<'
 t_LE = r'<='
 t_GT = r'>'
