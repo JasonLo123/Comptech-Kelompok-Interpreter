@@ -12,5 +12,5 @@ BEGIN
     WRITELN('Num2 is ',num2);
     WRITELN('Num3 is ',num3);
     WRITELN('Sum 3 numbers is ',sum);
-    WRITELN('Average is ',avg)
+    WRITELN('Average is ',avg);
 END.

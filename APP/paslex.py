@@ -1,87 +1,60 @@
 from ply import *
 
-# Define keywords names
-keywords = [
-    'PROGRAM', 'VAR', 'BEGIN', 'END', 'INTEGER', 'REAL',
-    'WRITELN', 'WRITE', 'FOR', 'TO', 
-    'DO', 'IF', 'THEN', 'ELSE', 'MOD',
-]
+# Tokens
+tokens = (
+    'PROGRAM', 'VAR', 'BEGIN', 'END', 'INTEGER', 'REAL', 'ASSIGN',
+    'SEMICOLON', 'COLON', 'COMMA', 'PLUS', 'DIVIDE', 'LPAREN', 'RPAREN',
+    'WRITELN', 'STRING', 'ID', 'NUMBER', 'DOT', 'MINUS', 'TIMES', 'MOD'
+)
 
-# Define token names
-tokens = keywords + [
-    'ID',           # Identifiers
-    'NUMBER',       # Numeric literals
-    'COLON'         # ':'
-    'SEMICOLON',    # ';'
-    'COMMA',        # ','
-    'PLUS',         # '+'
-    'MINUS',        # '-'
-    'TIMES',        # '*'
-    'POWER',        # **
-    'DIVIDE',       # '/'
-    'LT',           # '<'
-    'LE',           # '<='
-    'GT',           # '>'
-    'GE',           # '>='
-    'NE',           # '<>'
-    'EQUAL',        # '='
-    'LPAREN',       # '('
-    'RPAREN',       # ')'
-    'DOT',          # '.'
-    'ASSIGN',       # ':='
-    'STRING',       # string literals
-]
+# Reserved words
+reserved = {
+    'PROGRAM': 'PROGRAM',
+    'VAR': 'VAR',
+    'BEGIN': 'BEGIN',
+    'END': 'END',
+    'INTEGER': 'INTEGER',
+    'REAL': 'REAL',
+    'WRITELN': 'WRITELN',
+    'MOD' : 'MOD'
+}
 
-
-# Regular expression rules for simple tokens
-t_COLON = r':'
+# Token definitions
+t_ASSIGN = r':='
 t_SEMICOLON = r';'
+t_COLON = r':'
 t_COMMA = r','
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
-t_POWER = r'\*\*'
+t_MOD = r'\bMOD\b'
 t_DIVIDE = r'/'
-t_LT = r'<'
-t_LE = r'<='
-t_GT = r'>'
-t_GE = r'>='
-t_NE = r'<>|!='
-t_EQUAL = r'='
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_DOT = r'\.'
-t_ASSIGN = r':='
+t_ignore = ' \t'  # Ignore spaces and tabs
 
-# Regular expression rules with action code
+def t_STRING(t):
+    r"'[^']*'"
+    t.value = t.value[1:-1]  # Remove surrounding quotes
+    return t
+
 def t_ID(t):
-    r'[A-Za-z][A-Za-z0-9]*'
-    t.value = t.value.upper()  # Pascal keywords are case-insensitive
-    if t.value in keywords:
-        t.type = t.value  # Match keywords
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value.upper(), 'ID')  # Check if it's a reserved word
     return t
 
 def t_NUMBER(t):
-    r'\d+(\.\d+([eE][+-]?\d+)?)?'
-    t.value = float(t.value) if '.' in t.value or 'e' in t.value.lower() else int(t.value)
-    return t
-
-def t_STRING(t):
-    r'\'(\\.|[^\\\'])*\''
-    t.value = t.value[1:-1].replace("''", "'")  # Remove quotes and handle escaped quotes
+    r'\d+(\.\d+)?'
+    t.value = float(t.value) if '.' in t.value else int(t.value)
     return t
 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
-    return t
 
-# Ignore spaces and tabs
-t_ignore = ' \t'
-
-# Error handling rule
 def t_error(t):
-    print(f"Illegal character '{t.value[0]}' at line {t.lexer.lineno}")
-    t.lexer.skip(1) 
+    print(f"Illegal character '{t.value[0]}'")
+    t.lexer.skip(1)
 
 lex.lex(debug=0)
