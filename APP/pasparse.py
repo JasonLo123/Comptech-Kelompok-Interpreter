@@ -47,9 +47,9 @@ def p_statement(p):
     if p[1] == 'WRITELN':
         p[0] = ('WRITELN', p[3])
     elif len(p) == 9:  # IF condition without ELSE
-        p[0] = ('IF', p[3], p[7])  # True branch 
+        p[0] = ('IF', p[3], p[7])  # True branch only
     elif len(p) == 13:  # IF condition with ELSE
-        p[0] = ('IF', p[3], p[7], p[11])  # True and false branche
+        p[0] = ('IF', p[3], p[7], p[11])  # True and false branches
     else:
         p[0] = ('ASSIGN', p[1], p[3])
 
