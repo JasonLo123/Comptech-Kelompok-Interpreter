@@ -1,3 +1,4 @@
+
 from ply import *
 import paslex
 import pasinterp
@@ -11,7 +12,8 @@ precedence = (
 
 def p_program(p):
     'program : PROGRAM ID SEMICOLON declarations BEGIN statements END DOT'
-    pasinterp.interpret(p[6])  # Pass the parsed statements to the interpreter
+    print("Parsed program:", p[6])  # Debugging line
+    pasinterp.interpret(p[6]) # Pass the parsed statements to the interpreter
 
 def p_declarations(p):
     '''declarations : VAR var_declaration
@@ -39,9 +41,15 @@ def p_statements(p):
 
 def p_statement(p):
     '''statement : ID ASSIGN expression
-                 | WRITELN LPAREN writeln_args RPAREN'''
+                 | WRITELN LPAREN writeln_args RPAREN
+                 | IF LPAREN expression RPAREN THEN BEGIN statements END
+                 | IF LPAREN expression RPAREN THEN BEGIN statements END ELSE BEGIN statements END'''
     if p[1] == 'WRITELN':
         p[0] = ('WRITELN', p[3])
+    elif len(p) == 9:  # IF condition without ELSE
+        p[0] = ('IF', p[3], p[7])  # True branch 
+    elif len(p) == 13:  # IF condition with ELSE
+        p[0] = ('IF', p[3], p[7], p[11])  # True and false branche
     else:
         p[0] = ('ASSIGN', p[1], p[3])
 
@@ -64,6 +72,8 @@ def p_expression(p):
                   | expression DIVIDE term
                   | expression TIMES term
                   | expression MOD term
+                  | expression GT term
+                  | expression NE term
                   | term'''
     if len(p) == 4:
         p[0] = (p[2], p[1], p[3])

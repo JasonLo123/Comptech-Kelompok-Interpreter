@@ -4,7 +4,8 @@ from ply import *
 tokens = (
     'PROGRAM', 'VAR', 'BEGIN', 'END', 'INTEGER', 'REAL', 'ASSIGN',
     'SEMICOLON', 'COLON', 'COMMA', 'PLUS', 'DIVIDE', 'LPAREN', 'RPAREN',
-    'WRITELN', 'STRING', 'ID', 'NUMBER', 'DOT', 'MINUS', 'TIMES', 'MOD'
+    'WRITELN', 'WRITE', 'STRING', 'ID', 'NUMBER', 'DOT', 'MINUS', 'TIMES', 'MOD',
+    'IF', 'THEN', 'ELSE', 'GT', 'NE', 'FOR', 'DO', 'TO'
 )
 
 # Reserved words
@@ -16,7 +17,14 @@ reserved = {
     'INTEGER': 'INTEGER',
     'REAL': 'REAL',
     'WRITELN': 'WRITELN',
-    'MOD' : 'MOD'
+    'WRITE': 'WRITE',
+    'MOD' : 'MOD',
+    'IF' : 'IF',
+    'THEN' : 'THEN',
+    'ELSE' : 'ELSE',
+    'FOR' : 'FOR',
+    'DO' : 'DO',
+    'TO' : 'TO'
 }
 
 # Token definitions
@@ -27,6 +35,8 @@ t_COMMA = r','
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
+t_GT = r'>'
+t_NE = r'<>'
 t_MOD = r'\bMOD\b'
 t_DIVIDE = r'/'
 t_LPAREN = r'\('
